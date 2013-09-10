@@ -48,6 +48,9 @@ module SMSFu
         SMSNotifier.send_sms(email, message, from).deliver
       end
     end
+    def get_carriers
+	SMSFu.carriers
+    end
   end
   
   class << self
@@ -99,7 +102,7 @@ module SMSFu
     end  
 
     def template_directory
-      directory = defined?(Rails) ? "#{RAILS_ROOT}/config" : "#{File.dirname(__FILE__)}/../../templates"
+      directory = defined?(Rails) ? "#{Rails.root}/config" : "#{File.dirname(__FILE__)}/../../templates"
       if (defined?(Rails) && Rails.env == 'test') || (defined?(RAILS_ENV) && RAILS_ENV == 'test)')
         "#{File.dirname(__FILE__)}/../../templates"
       else
